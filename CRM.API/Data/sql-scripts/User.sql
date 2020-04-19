@@ -9,6 +9,7 @@ CREATE TABLE [dbo].[User]
     [BirthDate] DATE NULL, 
     [Gender] CHAR(1) NULL, 
     [Login] NVARCHAR(50) NULL, 
-    [Password] NVARCHAR(50) NULL, 
+    [PasswordHash] varbinary(max) NULL, 
+    [PasswordSalt] varbinary(max) NULL, 
     CONSTRAINT [FK_Users_Departments] FOREIGN KEY ([DepartmentId]) REFERENCES [Department]([Id])
 )
