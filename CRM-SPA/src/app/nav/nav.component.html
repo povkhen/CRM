@@ -1,39 +1,36 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="navbar-link navbar-brand" href="#">Username_yan</a>
+<nav class="navbar navbar-expand-md navbar-default">
+  <div class="container">
+    <a class="navbar-link navbar-brand" href="#">Title</a>
+    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Admin</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Messages</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
+        <a class="nav-link" href="#">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Messages</a>
+      </li>
     </ul>
 
-    <div *ngIf="loggedIn()" class="dropdown">
-      <a class="dropdown-toggle text-light">
-        Welcome User
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <a class="dropdown-toggle" dropdownToggle>
+        Welcome {{authService.decodedToken?.unique_name | titlecase}}
       </a>
-    
-      <div class="dropdown-menu">
+      
+      <div class="dropdown-menu mt-5" *dropdownMenu>
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Edit Profile</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#"><i class ="fa fa-sign-out"></i>Logout</a>
+        <a class="dropdown-item" (click)="logout()"><i class ="fa fa-sign-out"></i>Logout</a>
       </div>
     </div>
-
+    
     <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
       <input class="form-control mr-sm-2" type="text" name="login"
-         placeholder="Login" required [(ngModel)]="model.login">
+      placeholder="Login" required [(ngModel)]="model.login">
       <input class="form-control mr-sm-2" type="password" name="password" 
-        placeholder="Password" required [(ngModel)]="model.password">
+      placeholder="Password" required [(ngModel)]="model.password">
       <button [disabled]="!loginForm.valid" class="btn btn-success my-2 mr-sm-2" type="submit">Login</button>
     </form>
-  </nav>
+  </div>
+</nav>

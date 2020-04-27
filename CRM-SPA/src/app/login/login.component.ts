@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +10,18 @@ import { AuthService } from '../_services/auth.service';
 export class LoginComponent implements OnInit {
   model: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertifyService: AlertifyService) { }
 
   ngOnInit() {
   }
 
 
+
   login() {
     this.authService.login(this.model).subscribe(next => {
-      console.log('Logged in seccessfully');
+      this.alertifyService.success('Logged in seccessfully');
     }, error => {
-      console.log('Failed to login');
+      this.alertifyService.error(error);
     });
   }
 
@@ -30,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    console.log('logged out');
+    this.alertifyService.message('logged out');
   }
-
 }
