@@ -1,12 +1,17 @@
+<app-nav></app-nav>
 <div class="container mt-5">
-  <div *ngIf="!registerMode " style="text-align: center">
+  <div *ngIf="!registerMode" [hidden]="loggedIn()" style="text-align: center">
     <h1>Title</h1>
     <p class="lead">Come on in to work in our company... All you need to do is sign up!</p>
     <div class="text-center">
       <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
-      <button class="btn btn-primary btn-lg mr-2">Login</button>
+      <button class="btn btn-primary btn-lg mr-2" [routerLink]="['/login']">Login</button>
       <button class="btn btn-info btn-lg">Learn more</button>
     </div> 
+  </div>
+
+  <div class="jumbotron" [hidden]="!loggedIn()">
+    <h1>Welcome to Title</h1>
   </div>
 
   <div *ngIf="registerMode" class="container">

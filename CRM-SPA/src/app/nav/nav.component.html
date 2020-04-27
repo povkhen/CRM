@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-default">
   <div class="container">
-    <a class="navbar-link navbar-brand" href="#">Title</a>
+    <a class="navbar-link navbar-brand" [routerLink]="['/']">Title</a>
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Admin</a>
+      <li class="nav-item " routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/admin']">Admin</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Dashboard</a>
+      <li class="nav-item"  routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Messages</a>
+      <li class="nav-item"  routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/messages']">Messages</a>
       </li>
     </ul>
 

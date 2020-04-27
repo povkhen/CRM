@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CollapseNavComponent } from './collapse-nav.component';
+import { CoworkersComponent } from './coworkers.component';
 
-describe('CollapseNavComponent', () => {
-  let component: CollapseNavComponent;
-  let fixture: ComponentFixture<CollapseNavComponent>;
+describe('CoworkersComponent', () => {
+  let component: CoworkersComponent;
+  let fixture: ComponentFixture<CoworkersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CollapseNavComponent ]
+      declarations: [ CoworkersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CollapseNavComponent);
+    fixture = TestBed.createComponent(CoworkersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
