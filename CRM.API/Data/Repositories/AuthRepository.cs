@@ -1,9 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using CRM.API.Data.Interfaces;
 using CRM.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CRM.API.Data
+namespace CRM.API.Data.Repositories
 {
     public class AuthRepository : IAuthRepository
     {

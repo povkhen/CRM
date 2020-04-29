@@ -1,6 +1,9 @@
 using System.Net;
 using System.Text;
+using AutoMapper;
 using CRM.API.Data;
+using CRM.API.Data.Interfaces;
+using CRM.API.Data.Repositories;
 using CRM.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -28,9 +31,17 @@ namespace CRM.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:crmDB"]));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt => 
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddCors();
+            services.AddAutoMapper(typeof(UserRepository).Assembly,
+                                   typeof(ClientRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>(); 
+            services.AddScoped<IUserRepository, UserRepository>(); 
+            services.AddScoped<IClientRepository, ClientRepository>(); 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

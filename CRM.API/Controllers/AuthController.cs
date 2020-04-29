@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using CRM.API.Data;
+using CRM.API.Data.Interfaces;
 using CRM.API.DTOs;
 using CRM.API.Models;
 using Microsoft.AspNetCore.Mvc;

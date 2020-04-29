@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200416145324_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200429121123_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,23 +54,13 @@ namespace CRM.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("HeadId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserProfileId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("HeadId");
-
-                    b.HasIndex("UserProfileId");
 
                     b.ToTable("Department");
                 });
@@ -82,23 +72,29 @@ namespace CRM.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("BuildingNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DeliveryAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeliveryDate")
+                    b.Property<DateTime?>("ExecutionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DeliveryDriverId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("DeliveryStatus")
+                    b.Property<byte>("ExecutionStatus")
                         .HasColumnType("tinyint");
+
+                    b.Property<int?>("ExecutorId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -109,16 +105,27 @@ namespace CRM.API.Migrations
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("PaymentStatus")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int?>("ReceiverId")
+                    b.Property<int?>("PaymentId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Sum")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("VendorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ExecutorId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.HasIndex("VendorId");
 
                     b.ToTable("Order");
                 });
@@ -133,9 +140,6 @@ namespace CRM.API.Migrations
                     b.Property<byte?>("Method")
                         .HasColumnType("tinyint");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<byte?>("Status")
                         .HasColumnType("tinyint");
 
@@ -144,9 +148,60 @@ namespace CRM.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Payment");
+                });
+
+            modelBuilder.Entity("CRM.API.Models.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("CRM.API.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("CRM.API.Models.User", b =>
@@ -156,34 +211,14 @@ namespace CRM.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Login")
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("CRM.API.Models.UserProfile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -197,11 +232,22 @@ namespace CRM.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Login")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
@@ -209,53 +255,83 @@ namespace CRM.API.Migrations
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("CRM.API.Models.UserService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("ServiceId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
-                    b.ToTable("UserProfile");
+                    b.ToTable("UserService");
                 });
 
-            modelBuilder.Entity("CRM.API.Models.Department", b =>
+            modelBuilder.Entity("CRM.API.Models.Order", b =>
                 {
-                    b.HasOne("CRM.API.Models.User", "Head")
+                    b.HasOne("CRM.API.Models.User", "Executor")
                         .WithMany()
-                        .HasForeignKey("HeadId");
+                        .HasForeignKey("ExecutorId");
 
-                    b.HasOne("CRM.API.Models.UserProfile", null)
-                        .WithMany("Department")
-                        .HasForeignKey("UserProfileId");
+                    b.HasOne("CRM.API.Models.Customer", "Owner")
+                        .WithMany("Orders")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CRM.API.Models.Payment", "Payment")
+                        .WithMany("Orders")
+                        .HasForeignKey("PaymentId");
+
+                    b.HasOne("CRM.API.Models.User", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId");
                 });
 
-            modelBuilder.Entity("CRM.API.Models.Payment", b =>
+            modelBuilder.Entity("CRM.API.Models.Photo", b =>
                 {
-                    b.HasOne("CRM.API.Models.Order", "Order")
-                        .WithMany("Payment")
-                        .HasForeignKey("OrderId");
+                    b.HasOne("CRM.API.Models.User", "User")
+                        .WithMany("Photos")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CRM.API.Models.User", b =>
                 {
-                    b.HasOne("CRM.API.Models.Department", null)
-                        .WithMany("User")
+                    b.HasOne("CRM.API.Models.Department", "Department")
+                        .WithMany("Users")
                         .HasForeignKey("DepartmentId");
                 });
 
-            modelBuilder.Entity("CRM.API.Models.UserProfile", b =>
+            modelBuilder.Entity("CRM.API.Models.UserService", b =>
                 {
-                    b.HasOne("CRM.API.Models.Department", "DepartmentNavigation")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId");
+                    b.HasOne("CRM.API.Models.Service", "Service")
+                        .WithMany("UserServices")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CRM.API.Models.User", "User")
-                        .WithOne("Profile")
-                        .HasForeignKey("CRM.API.Models.UserProfile", "UserId")
+                        .WithMany("UserServices")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

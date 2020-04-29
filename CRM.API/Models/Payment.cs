@@ -9,8 +9,6 @@ namespace CRM.API.Models
         public byte? Status { get; set; }
         public decimal? Sum { get; set; }
         public byte? Method { get; set; }
-        public int? OrderId { get; set; }
-
-        public virtual Order Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

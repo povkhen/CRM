@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using CRM.API.Models;
 
-namespace CRM.API.Data
+namespace CRM.API.Data.Interfaces
 {
     public interface IAuthRepository
     {

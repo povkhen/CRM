@@ -1,0 +1,179 @@
+[
+  {
+    "Name": "Research and Development",
+    "Phone": "(978) 595-3887",
+    "Users": [
+      {
+        "Login": "Misha",
+        "FullName": "Misha Povkh",
+        "Phone": "(978) 595-3887",
+        "Gender": "male",
+        "BirthDate": "1973-12-26",
+        "Password": "password",
+        "Position": "Developer",
+        "Created": "2017-08-16",
+        "LastActive": "2017-08-16",
+        "Email": "silviabutler@sureplex.com",
+        "City": "Virgie",
+        "Country": "Cuba",
+        "Photos": [
+          {
+            "url": "https://randomuser.me/api/portraits/men/42.jpg",
+            "isMain": true,
+            "description": "Enim sint fugiat commodo irure est quis dolor eu nulla est."
+          }
+        ]
+      },
+      {
+        "Login": "Yan",
+        "FullName": "Yan Mazan",
+        "Phone": "(832) 497-2081",
+        "Gender": "male",
+        "BirthDate": "1978-11-06",
+        "Password": "password",
+        "Position": "Developer",
+        "Created": "2017-07-25",
+        "LastActive": "2017-07-25",
+        "Email": "claricedavid@voratak.com",
+        "City": "Bentonville",
+        "Country": "Saint Kitts and Nevis",
+        "Photos": [
+          {
+            "url": "https://randomuser.me/api/portraits/men/81.jpg",
+            "isMain": true,
+            "description": "Sunt deserunt consectetur id aliqua laborum."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Marketing",
+    "Phone": "(826) 573-2911",
+    "Users": [
+      {
+        "Login": "Cassie",
+        "FullName": "Cassie Joli",
+        "Phone": "(826) 573-2911",
+        "Gender": "female",
+        "BirthDate": "1987-03-26",
+        "Password": "password",
+        "Position": "Marketer",
+        "Created": "2017-06-06",
+        "LastActive": "2017-06-06",
+        "Email": "tracyrollins@eschoir.com",
+        "City": "Golconda",
+        "Country": "Belize",
+        "Photos": [
+          {
+            "url": "https://randomuser.me/api/portraits/women/66.jpg",
+            "isMain": true,
+            "description": "Qui do exercitation in veniam."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Accounting and Finance",
+    "Phone": "(821) 501-2447",
+    "Users": [
+      {
+        "Login": "Sofia",
+        "FullName": "Sofia Brown",
+        "Phone": "(821) 501-2447",
+        "Gender": "female",
+        "BirthDate": "1977-02-07",
+        "Password": "password",
+        "Position": "Accountant",
+        "Created": "2017-04-19",
+        "LastActive": "2017-04-19",
+        "Email": "sotoclark@comtest.com",
+        "City": "Allison",
+        "Country": "Yugoslavia",
+        "Photos": [
+          {
+            "url": "https://randomuser.me/api/portraits/women/42.jpg",
+            "isMain": true,
+            "description": "In voluptate ipsum non aute eiusmod non culpa ad."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Production",
+    "Phone": "(899) 451-2754",
+    "Users": [
+      {
+        "Login": "Owens",
+        "FullName": "Owens Pushok",
+        "Phone": "(899) 451-2754",
+        "Gender": "male",
+        "BirthDate": "1979-08-28",
+        "Password": "password",
+        "Position": "Worker",
+        "Created": "2017-02-10",
+        "LastActive": "2017-02-10",
+        "Email": "claudiawyatt@katakana.com",
+        "City": "Wilmington",
+        "Country": "China",
+        "Photos": [
+          {
+            "url": "https://randomuser.me/api/portraits/men/66.jpg",
+            "isMain": true,
+            "description": "Deserunt enim ipsum non ex id proident quis consequat."
+          }
+        ]
+      },
+      {
+        "Login": "Bradshaw",
+        "FullName": "Bradshaw Miller",
+        "Phone": "(842) 442-2191",
+        "Gender": "male",
+        "BirthDate": "1991-01-22",
+        "Password": "password",
+        "Position": "Driver",
+        "Created": "2017-05-07",
+        "LastActive": "2017-05-07",
+        "Email": "abigailchang@xleen.com",
+        "City": "Greenbackville",
+        "Country": "Dominican Republic",
+        "Photos": [
+          {
+            "url": "https://randomuser.me/api/portraits/men/67.jpg",
+            "isMain": true,
+            "description": "Deserunt elit id deserunt tempor proident officia."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Human Resource Management",
+    "Phone": "(900) 516-3692",
+    "Users": [
+      {
+        "Login": "Dean",
+        "FullName": "Dean Winchester",
+        "Phone": "(900) 516-3692",
+        "Gender": "female",
+        "BirthDate": "1963-01-15",
+        "Password": "password",
+        "Position": "HR",
+        "Created": "2017-01-22",
+        "LastActive": "2017-01-22",
+        "Email": "griffinrandolph@earthplex.com",
+        "City": "Holtville",
+        "Country": "Liechtenstein",
+        "Photos": [
+          {
+            "url": "https://randomuser.me/api/portraits/men/65.jpg",
+            "isMain": true,
+            "description": "Dolore ea ut deserunt anim aliquip Lorem occaecat anim."
+          }
+        ]
+      }
+    ]
+  }
+]
