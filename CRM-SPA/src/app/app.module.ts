@@ -26,6 +26,9 @@ import { appRoutes } from './routes';
 import { CoworkerDetailedComponent } from './coworkers_folder/coworker-detailed/coworker-detailed.component';
 import { CoworkerDetailResolver } from './_resolvers/coworker-detailed.resolver';
 import { CoworkersResolver } from './_resolvers/coworkers.resolver';
+import { CoworkerEditComponent } from './coworkers_folder/coworker-edit/coworker-edit.component';
+import { CoworkerEditResolver } from './_resolvers/coworker-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -48,6 +51,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       CoworkersComponent,
       CoworkerCardComponent,
       CoworkerDetailedComponent,
+      CoworkerEditComponent,
       AdminComponent,
       DashboardComponent,
       MessagesComponent,
@@ -72,9 +76,12 @@ export class CustomHammerConfig extends HammerGestureConfig  {
    ],
    providers: [
       AuthService,
+      AuthGuard,
+      PreventUnsavedChanges,
       UserService,
       CoworkerDetailResolver,
       CoworkersResolver,
+      CoworkerEditResolver,
       ErrorInterceptorProvider,
       { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],

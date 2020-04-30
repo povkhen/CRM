@@ -13,7 +13,8 @@ export interface User {
     createdAt: Date;
     lastActive: Date;
     photoURL: string;
-    adress: string;
+    country: string;
+    city: string;
     departmentName?: string;
     departmentPhone?: string;
     photos?: Photo[];

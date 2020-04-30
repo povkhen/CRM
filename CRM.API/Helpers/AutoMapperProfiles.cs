@@ -14,13 +14,9 @@ namespace CRM.API.Helpers
                            opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.DepartmentName,
                            opt => opt.MapFrom(src => src.Department.Name))
-                .ForMember(dest => dest.Adress,
-                           opt => opt.MapFrom(src => src.City +", " + src.Country))
                 .ForMember(dest => dest.Age,
                            opt => opt.MapFrom(src => src.BirthDate.CalculateAge()));
             CreateMap<User,UserForDetailedDto>()
-                .ForMember(dest => dest.Adress,
-                           opt => opt.MapFrom(src => src.City +", " + src.Country))
                 .ForMember(dest => dest.PhotoURL, 
                            opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.DepartmentName,
@@ -37,6 +33,7 @@ namespace CRM.API.Helpers
             CreateMap<Order, OrderForClientDto>();
             CreateMap<Photo,PhotosForDetailedDto>();
             CreateMap<Department,DepartmentForUserDto>();
+            CreateMap<UserForUpdateDto, User>();
         }
     }
 }
