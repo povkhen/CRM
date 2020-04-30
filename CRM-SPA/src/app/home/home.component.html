@@ -1,7 +1,7 @@
 <app-nav></app-nav>
 <div class="container mt-5">
   <div *ngIf="!registerMode" [hidden]="loggedIn()" style="text-align: center">
-    <h1>Title</h1>
+    <h1>CRM</h1>
     <p class="lead">Come on in to work in our company... All you need to do is sign up!</p>
     <div class="text-center">
       <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
@@ -10,8 +10,13 @@
     </div> 
   </div>
 
-  <div class="jumbotron" [hidden]="!loggedIn()">
-    <h1>Welcome to Title</h1>
+  <div [hidden]="!loggedIn()">
+    <div class="jumbotron">
+      <h1>Welcome to CRM</h1>
+    </div>
+    <div class="jumbotron">
+      <h4>News...</h4>
+    </div>
   </div>
 
   <div *ngIf="registerMode" class="container">

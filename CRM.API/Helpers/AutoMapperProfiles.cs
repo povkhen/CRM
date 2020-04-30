@@ -19,7 +19,9 @@ namespace CRM.API.Helpers
                 .ForMember(dest => dest.Age,
                            opt => opt.MapFrom(src => src.BirthDate.CalculateAge()));
             CreateMap<User,UserForDetailedDto>()
-                .ForMember(dest => dest.PhotoUrl, 
+                .ForMember(dest => dest.Adress,
+                           opt => opt.MapFrom(src => src.City +", " + src.Country))
+                .ForMember(dest => dest.PhotoURL, 
                            opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.DepartmentName,
                            opt => opt.MapFrom(src => src.Department.Name))
