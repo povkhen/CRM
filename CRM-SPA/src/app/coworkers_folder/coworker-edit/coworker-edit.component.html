@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user.photoURL}}" alt="{{user.fullName}}">
+        <img class="card-img-top img-thumbnail" src="{{photoUrl}}" alt="{{user.fullName}}">
         <div class="card-body">
           <div>
             <strong>Contact:</strong>
@@ -53,7 +53,9 @@
              <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
               <h3>Name</h3>
               <div>
-                  <h6 class="text-center">FullName</h6>
+                  <h6 class="text-center">Login</h6>
+                  <input class="form-control" type="text" name="login"  [(ngModel)]="user.login"/>
+                  <h6 class="text-center">Full Name</h6>
                   <input class="form-control" type="text" name="fullName"  [(ngModel)]="user.fullName"/>
               </div>
                 <h3>Contact</h3>
@@ -77,7 +79,8 @@
              </form>
           </tab>
           <tab heading="Edit Photos">
-            <p>Coming soon...</p>
+            <app-photo-editor [photos]="user.photos"
+             (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
          </tab>
         </tabset>
       </div>

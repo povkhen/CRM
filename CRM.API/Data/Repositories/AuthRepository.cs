@@ -16,7 +16,7 @@ namespace CRM.API.Data.Repositories
         }
         public async Task<User> Login(string login, string password)
         {
-            var user = await _context.User.FirstOrDefaultAsync( x => x.Login == login);
+            var user = await _context.User.Include(p => p.Photos).FirstOrDefaultAsync( x => x.Login == login);
 
             if (user == null)
                 return null;

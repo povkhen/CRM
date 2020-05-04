@@ -6,6 +6,7 @@ import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -29,6 +30,7 @@ import { CoworkersResolver } from './_resolvers/coworkers.resolver';
 import { CoworkerEditComponent } from './coworkers_folder/coworker-edit/coworker-edit.component';
 import { CoworkerEditResolver } from './_resolvers/coworker-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PhotoEditorComponent } from './coworkers_folder/photo-editor/photo-editor.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -55,7 +57,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       AdminComponent,
       DashboardComponent,
       MessagesComponent,
-      ClientsComponent
+      ClientsComponent,
+      PhotoEditorComponent
    ],
    imports: [
       BrowserModule,
@@ -65,6 +68,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
+      FileUploadModule,
       JwtModule.forRoot({
          config: {
             // tslint:disable-next-line: object-literal-shorthand

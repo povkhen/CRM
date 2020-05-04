@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CRM.API.Data.Interfaces;
 using CRM.API.Models;
@@ -39,6 +40,18 @@ namespace CRM.API.Data.Repositories
                                            .Include(d => d.Department)
                                            .ToListAsync();
             return users;
+        }
+
+        public async Task<Photo> GetMainPhotoForUser(int userId)
+        {
+            return await _context.Photo.Where(u => u.UserId == userId)
+                        .FirstOrDefaultAsync(m => m.IsMain);
+        }
+
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var photo = await _context.Photo.FirstOrDefaultAsync(p => p.Id ==id);
+            return photo;
         }
 
         public async Task<bool> SaveAll()

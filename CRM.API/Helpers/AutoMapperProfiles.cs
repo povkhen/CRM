@@ -32,6 +32,8 @@ namespace CRM.API.Helpers
                            opt => opt.MapFrom(src => src.Orders.Count));
             CreateMap<Order, OrderForClientDto>();
             CreateMap<Photo,PhotosForDetailedDto>();
+            CreateMap<Photo,PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto,Photo>();
             CreateMap<Department,DepartmentForUserDto>();
             CreateMap<UserForUpdateDto, User>();
         }

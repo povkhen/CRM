@@ -11,5 +11,7 @@ namespace CRM.API.Data.Interfaces
          Task<bool> SaveAll();
          Task<IEnumerable<User>> GetAll();
          Task<User> Get(int id);
+         Task<Photo> GetPhoto(int id);
+         Task<Photo> GetMainPhotoForUser(int userId);
     }
 }
