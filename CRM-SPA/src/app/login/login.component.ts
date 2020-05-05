@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.alertifyService.error(error);
     }, () => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     });
   }
 

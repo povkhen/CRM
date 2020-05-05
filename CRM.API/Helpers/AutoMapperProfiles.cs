@@ -36,6 +36,7 @@ namespace CRM.API.Helpers
             CreateMap<PhotoForCreationDto,Photo>();
             CreateMap<Department,DepartmentForUserDto>();
             CreateMap<UserForUpdateDto, User>();
+            CreateMap<UserForRegisterDto, User>();
         }
     }
 }
