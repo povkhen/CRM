@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CRM.API.Data.Interfaces;
 using CRM.API.DTOs;
+using CRM.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,5 +38,39 @@ namespace CRM.API.Controllers
             var clientToReturn = _mapper.Map<ClientForDetailedDto>(client);
             return Ok(clientToReturn);
         }
+        
+        [HttpGet("{id}/orders")]
+        public async Task<IActionResult> GetOrders(int id)
+        {
+            var orders = await _repo.GetAllOrders();
+            var clientsOrders = orders.Where(i => i.OwnerId == id);
+            var ordersToReturn = _mapper.Map<IEnumerable<OrderForListDto>>(clientsOrders);
+            return Ok(ordersToReturn);
+        }
+
+         [HttpPost("{id}/addorder")]
+        public async Task<IActionResult> AddOrder(int ownerId,
+            [FromForm] OrderForAddingDto orderForAddingDto)
+        {    
+            var owners = await _repo.GetAll();        
+            if(!owners.Any(i => i.Id == ownerId))
+                return Unauthorized();
+             
+            var ownerFromRepo = await _repo.Get(ownerId);
+
+            if (await _repo.NumberExists(orderForAddingDto.Number))
+                return BadRequest("Number already exists");
+
+            var orderToCreate = _mapper.Map<Order>(orderForAddingDto);
+
+            ownerFromRepo.Orders.Add(orderToCreate);
+
+            if(await _repo.SaveAll())
+            {
+                return CreatedAtRoute("GetPhoto", new {controller = "Clients" ,id = orderToCreate.Id},
+                    orderToCreate);
+            }
+            return BadRequest("Could not add the photo");
+        }
     }
-}
+}   

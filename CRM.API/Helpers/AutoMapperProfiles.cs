@@ -26,17 +26,27 @@ namespace CRM.API.Helpers
                 .ForMember(dest => dest.Age,
                            opt => opt.MapFrom(src => src.BirthDate.CalculateAge()));
 
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<UserForRegisterDto, User>();
+            CreateMap<Department,DepartmentForUserDto>();
+
             CreateMap<Customer, ClientForDetailedDto>();
             CreateMap<Customer,ClientForListDto>()
                 .ForMember(dest => dest.OrdersCount,
                            opt => opt.MapFrom(src => src.Orders.Count));
             CreateMap<Order, OrderForClientDto>();
+
             CreateMap<Photo,PhotosForDetailedDto>();
             CreateMap<Photo,PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto,Photo>();
-            CreateMap<Department,DepartmentForUserDto>();
-            CreateMap<UserForUpdateDto, User>();
-            CreateMap<UserForRegisterDto, User>();
+
+            CreateMap<Order, OrderForListDto>();
+            CreateMap<Order, OrderForDetailedDto>()
+                .ForMember(dest => dest.ExecutorName,
+                           opt => opt.MapFrom(src => src.Executor.FullName));
+            CreateMap<OrderForDetailedDto, Order>();
+            CreateMap<OrderForUpdateDto, Order>();
+            CreateMap<OrderForAddingDto, Order>();
         }
     }
 }

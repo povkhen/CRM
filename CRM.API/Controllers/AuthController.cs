@@ -30,8 +30,6 @@ namespace CRM.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            // validate request
-
             userForRegisterDto.Login = userForRegisterDto.Login.ToLower();
             if (await _repo.UserExists(userForRegisterDto.Login))
                 return BadRequest("Login already exists");

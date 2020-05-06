@@ -14,14 +14,31 @@ namespace CRM.API.Data.Repositories
             _context = context;
 
         }
-        public void Add<T>(T entity) where T: class
+
+
+         public async Task<Order> GetOrder(int id)
         {
-            _context.Add(entity);
+            var order = await _context.Order.Include(o => o.Owner)
+                                            .Include(v => v.Vendor)
+                                            .Include(p => p.Payment)
+                                            .FirstOrDefaultAsync(c => c.Id == id);
+            return order;
         }
 
-        public void Delete<T>(T entity) where T: class
+        public async Task<IEnumerable<Order>> GetAllOrders()
         {
-            _context.Remove(entity);
+            var orders = await _context.Order.Include(o => o.Owner)
+                                                .Include(v => v.Vendor)
+                                                .Include(p => p.Payment)
+                                                .ToListAsync();
+            return orders;
+        }
+
+        public async Task<bool> NumberExists(string number)
+        {
+            if (await _context.Order.AnyAsync(x => x.Number == number))
+                return true;
+            return false;
         }
 
         public async Task<Customer> Get(int id)
@@ -41,6 +58,18 @@ namespace CRM.API.Data.Repositories
         {
             return await _context.SaveChangesAsync() > 0;
         }
-        
+
+        public void DeleteOrder(Order order)
+        {
+            _context.Order.Remove(order);
+            _context.SaveChanges();
+        }
+
+        public async Task<Order> AddOrder(Order order)
+        {
+            await _context.Order.AddAsync(order);
+            await _context.SaveChangesAsync();
+            return order;
+        }
     }
 }

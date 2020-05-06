@@ -13,6 +13,7 @@ import { CoworkersResolver } from './_resolvers/coworkers.resolver';
 import { CoworkerEditComponent } from './coworkers_folder/coworker-edit/coworker-edit.component';
 import { CoworkerEditResolver } from './_resolvers/coworker-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { ClientsResolver } from './_resolvers/clients.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -26,11 +27,12 @@ export const appRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent},
             { path: 'dashboard/coworkers', component: CoworkersComponent,
                 resolve: {users: CoworkersResolver}},
+            { path: 'dashboard/clients', component: ClientsComponent,
+                resolve: {clients: ClientsResolver}},
             { path: 'dashboard/coworkers/:id', component: CoworkerDetailedComponent,
                 resolve: {user: CoworkerDetailResolver}},
             { path: 'coworker/edit', component: CoworkerEditComponent,
                 resolve: {user: CoworkerEditResolver}, canDeactivate: [PreventUnsavedChanges]},
-            { path: 'dashboard/clients', component: ClientsComponent},
             { path: 'messages', component: MessagesComponent},
         ]
     },

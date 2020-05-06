@@ -1,4 +1,39 @@
 <app-nav></app-nav>
-<p>
-  clients works!
-</p>
+<div class="main-content">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Created at</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Message</th>
+        <th scope="col">Orders count</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let client of clients">
+      <tr>
+        <th scope="row">{{client.id}}</th>
+        <td>{{client.name}}</td>
+        <td>{{client.phone}}</td>
+        <td>{{client.createdAt}}</td>
+        <td>{{client.email}}</td>
+        <td>
+          <button type="button" class="btn" style="height: 100%;"  href="">
+            <i class="fa fa-envelope"></i>
+          </button>
+        </td>
+        <td>{{client.ordersCount}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+    <tr>
+      <td colspan="7" style="text-align: center">
+        <button type="button" class="btn" id="add_client" style="display: inline-block; width: 100%; height: 100%">
+              <span class="fa fa-plus" aria-hidden="true"></span>
+        </button>					
+      </td>
+    </tr>
+  </table>
+</div>

@@ -33,6 +33,7 @@ import { CoworkerEditComponent } from './coworkers_folder/coworker-edit/coworker
 import { CoworkerEditResolver } from './_resolvers/coworker-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './coworkers_folder/photo-editor/photo-editor.component';
+import { ClientsResolver } from './_resolvers/clients.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -90,6 +91,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       PreventUnsavedChanges,
       UserService,
       CoworkerDetailResolver,
+      ClientsResolver,
       CoworkersResolver,
       CoworkerEditResolver,
       ErrorInterceptorProvider,
