@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using CRM.API.DTOs;
+using CRM.API.DTOs.MessagesDto;
 using CRM.API.Models;
 
 namespace CRM.API.Helpers
@@ -47,6 +48,14 @@ namespace CRM.API.Helpers
             CreateMap<OrderForDetailedDto, Order>();
             CreateMap<OrderForUpdateDto, Order>();
             CreateMap<OrderForAddingDto, Order>();
+
+            CreateMap<MessageForCreationDto, Message>().ReverseMap();
+            CreateMap<Message, MessageToReturnDto>()
+                .ForMember(dest => dest.SenderPhotoUrl,
+                           opt => opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
+                           
+                .ForMember(dest => dest.RecipientPhotoUrl,
+                           opt => opt.MapFrom(u => u.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
         }
     }
 }

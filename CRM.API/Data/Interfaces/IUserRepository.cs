@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CRM.API.Helpers;
 using CRM.API.Models;
 
 namespace CRM.API.Data.Interfaces
@@ -9,9 +10,15 @@ namespace CRM.API.Data.Interfaces
          void Add<T>(T entity) where T: class;
          void Delete<T>(T entity) where T: class;
          Task<bool> SaveAll();
-         Task<IEnumerable<User>> GetAll();
+         Task<PagedList<User>> GetAll(UserParams userParams);
+         Task<IEnumerable<string>> GetAllPositions();
          Task<User> Get(int id);
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhotoForUser(int userId);
+         
+         Task<Message> GetMessage(int id);
+         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
+         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
+         
     }
 }

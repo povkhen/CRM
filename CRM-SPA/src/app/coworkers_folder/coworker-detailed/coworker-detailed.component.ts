@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-coworker-detailed',
@@ -11,6 +12,7 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
   styleUrls: ['./coworker-detailed.component.css']
 })
 export class CoworkerDetailedComponent implements OnInit {
+  @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   user: User;
@@ -25,6 +27,11 @@ export class CoworkerDetailedComponent implements OnInit {
       this.user = data['user'];
     });
 
+    this.route.queryParams.subscribe(params => {
+      const selectedTab = params['tab'];
+      this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
+    });
+
     this.galleryOptions = [
       {
         width: '500px',
@@ -37,6 +44,10 @@ export class CoworkerDetailedComponent implements OnInit {
     ];
 
     this.galleryImages = this.getImages();
+  }
+
+  selectTab(tabId: number) {
+    this.memberTabs.tabs[tabId].active = true;
   }
 
   getImages() {

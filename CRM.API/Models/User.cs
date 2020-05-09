@@ -23,6 +23,8 @@ namespace CRM.API.Models
         public string Country { get; set; }
 
         public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Message> MessagesSent { get; set; }
+        public virtual ICollection<Message> MessagesReceived { get; set; }
         public virtual ICollection<UserService> UserServices { get; set; }
         public virtual int? DepartmentId { get; set; }
         public virtual Department Department { get; set; }

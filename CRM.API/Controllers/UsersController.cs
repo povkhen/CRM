@@ -26,10 +26,16 @@ namespace CRM.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await _repo.GetAll();
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var userFromRepo = await _repo.Get(currentUserId);
+            userParams.UserId = currentUserId;
+
+            var users = await _repo.GetAll(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(usersToReturn);
         }
 
@@ -39,6 +45,13 @@ namespace CRM.API.Controllers
             var user = await _repo.Get(id);
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
             return Ok(userToReturn);
+        }
+
+        [HttpGet("positions")]
+        public async Task<IActionResult> GetPositions()
+        {
+            var positions = await _repo.GetAllPositions();
+            return Ok(positions);
         }
 
         [HttpPut("{id}")]

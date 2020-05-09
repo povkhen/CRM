@@ -14,6 +14,7 @@ import { CoworkerEditComponent } from './coworkers_folder/coworker-edit/coworker
 import { CoworkerEditResolver } from './_resolvers/coworker-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ClientsResolver } from './_resolvers/clients.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -33,7 +34,8 @@ export const appRoutes: Routes = [
                 resolve: {user: CoworkerDetailResolver}},
             { path: 'coworker/edit', component: CoworkerEditComponent,
                 resolve: {user: CoworkerEditResolver}, canDeactivate: [PreventUnsavedChanges]},
-            { path: 'messages', component: MessagesComponent},
+            { path: 'messages', component: MessagesComponent,
+                resolve: {messages: MessagesResolver}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}
