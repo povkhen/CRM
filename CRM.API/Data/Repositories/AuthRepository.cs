@@ -16,12 +16,9 @@ namespace CRM.API.Data.Repositories
         }
         public async Task<User> Login(string login, string password)
         {
-            var user = await _context.User.Include(p => p.Photos).FirstOrDefaultAsync( x => x.Login == login);
+            var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync( x => x.UserName == login);
 
             if (user == null)
-                return null;
-
-            if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
             
             return user;
@@ -46,9 +43,10 @@ namespace CRM.API.Data.Repositories
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-            await _context.User.AddAsync(user);
+            
+            // user.PasswordHash = passwordHash;
+            // user.PasswordSalt = passwordSalt;
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
             return user;
@@ -66,7 +64,7 @@ namespace CRM.API.Data.Repositories
 
         public async Task<bool> UserExists(string login)
         {
-            if (await _context.User.AnyAsync(x => x.Login == login))
+            if (await _context.Users.AnyAsync(x => x.UserName == login))
                 return true;
             return false;
         }

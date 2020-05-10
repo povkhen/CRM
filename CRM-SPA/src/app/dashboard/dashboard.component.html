@@ -16,7 +16,7 @@
               <div class="col text-center">
                 <div class="btn-group">
                   <button type="button" [routerLink]="['/dashboard/orders']" class="btn btn-sm btn-outline-secondary" id="view_messages">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" [routerLink]="['/admin']" class="btn btn-sm btn-outline-secondary">Edit</button>
                 </div>
               </div>
             </div>
@@ -58,7 +58,8 @@
               <div class="col text-center">
                 <div class="btn-group">
                   <button type="button" [routerLink]="['/dashboard/coworkers']" class="btn btn-sm btn-outline-secondary" id="view_coworkers">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" [routerLink]="['/admin']" *appHasRole="['Admin', 'HR']"
+                   class="btn btn-sm btn-outline-secondary">Edit</button>
                 </div>
               </div>
             </div>

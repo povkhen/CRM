@@ -3,7 +3,7 @@ import { Service } from './service';
 
 export interface User {
     id: number;
-    login: string;
+    userName: string;
     fullName: string;
     position: string;
     email: string;
@@ -19,4 +19,5 @@ export interface User {
     departmentPhone?: string;
     photos?: Photo[];
     userServices: Service[];
+    roles?: string[];
 }

@@ -1,42 +1,71 @@
 using System.Collections.Generic;
 using System.Linq;
 using CRM.API.Models;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
 namespace CRM.API.Data
 {
     public class Seed
     {
-        public static void SeedDepartments(DataContext context)
+        public static void SeedDepartments(DataContext context, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
-            if (!context.Department.Any())
+            if (!context.Departments.Any())
             {
                 var departmentData = System.IO.File.ReadAllText("Data/JsonSeed/DepartmentSeedData.json");
                 var departments = JsonConvert.DeserializeObject<List<Department>>(departmentData);
+
+                //create some roles
+
+                var roles = new List<Role> 
+                {
+                    new Role {Name = "Member"},
+                    new Role {Name = "Admin"},
+                    new Role {Name = "Moderator"},
+                    new Role {Name = "HR"}
+                };
+
+                foreach (var role in roles)
+                {
+                    roleManager.CreateAsync(role).Wait();
+                }
+
                 foreach (var department in departments)
                 { 
                     foreach (var user in department.Users)
                     {
-                        byte[] passwordHash, passwordSalt;
-                        CreatePasswordHash("password", out passwordHash, out passwordSalt );
-                        user.PasswordHash = passwordHash;
-                        user.PasswordSalt = passwordSalt;
-                        user.Login = user.Login.ToLower();
+                        user.Photos.SingleOrDefault().IsApproved = true;
+                        userManager.CreateAsync(user, "password").Wait();
+                        userManager.AddToRoleAsync(user, "Member").Wait();
                     }
-                    context.Department.Add(department);   
+                    context.Departments.AddAsync(department);   
                 }
-                context.SaveChanges();
+
+                //create admin user
+
+                var adminUser = new User
+                {
+                    UserName = "Admin"
+                };
+
+                var result = userManager.CreateAsync(adminUser, "password").Result;
+                if (result.Succeeded)
+                {
+                    var admin = userManager.FindByNameAsync("Admin").Result;
+                    userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"}).Wait();
+                }
+                context.SaveChangesAsync();
             }
         }
         public static void SeedCustomers(DataContext context)
         {
-            if (!context.Customer.Any())
+            if (!context.Customers.Any())
             {
                 var customerData = System.IO.File.ReadAllText("Data/JsonSeed/CustomerSeedData.json");
                 var customers = JsonConvert.DeserializeObject<List<Customer>>(customerData);
                 foreach (var customer in customers)
                 { 
-                    context.Customer.Add(customer);   
+                    context.Customers.Add(customer);   
                 }
                 context.SaveChanges();
             }

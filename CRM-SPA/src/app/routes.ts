@@ -2,7 +2,6 @@ import {Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CoworkersComponent } from './coworkers_folder/coworkers/coworkers.component';
 import { MessagesComponent } from './messages/messages.component';
-import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -15,6 +14,7 @@ import { CoworkerEditResolver } from './_resolvers/coworker-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ClientsResolver } from './_resolvers/clients.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { AdminPanelComponent } from './admin-folder/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -24,7 +24,6 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'admin', component: AdminComponent},
             { path: 'dashboard', component: DashboardComponent},
             { path: 'dashboard/coworkers', component: CoworkersComponent,
                 resolve: {users: CoworkersResolver}},
@@ -35,7 +34,8 @@ export const appRoutes: Routes = [
             { path: 'coworker/edit', component: CoworkerEditComponent,
                 resolve: {user: CoworkerEditResolver}, canDeactivate: [PreventUnsavedChanges]},
             { path: 'messages', component: MessagesComponent,
-                resolve: {messages: MessagesResolver}}
+                resolve: {messages: MessagesResolver}},
+            { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator', 'HR']}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

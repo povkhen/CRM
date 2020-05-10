@@ -10,7 +10,7 @@ namespace CRM.API.Models
         public DateTime DateAdded { get; set; }
         public bool IsMain { get; set; }
         public string PublicId { get; set; }
-
+        public bool IsApproved { get; set; }
         public virtual int UserId { get; set; } 
         public virtual User User { get; set; }
     }

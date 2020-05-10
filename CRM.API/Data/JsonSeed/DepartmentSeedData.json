@@ -4,7 +4,7 @@
     "Phone": "(978) 595-3887",
     "Users": [
       {
-        "Login": "Misha",
+        "UserName": "Misha",
         "FullName": "Misha Povkh",
         "Phone": "(978) 595-3887",
         "Gender": "male",
@@ -25,7 +25,7 @@
         ]
       },
       {
-        "Login": "Yan",
+        "UserName": "Yan",
         "FullName": "Yan Mazan",
         "Phone": "(832) 497-2081",
         "Gender": "male",
@@ -52,7 +52,7 @@
     "Phone": "(826) 573-2911",
     "Users": [
       {
-        "Login": "Cassie",
+        "UserName": "Cassie",
         "FullName": "Cassie Joli",
         "Phone": "(826) 573-2911",
         "Gender": "female",
@@ -79,7 +79,7 @@
     "Phone": "(821) 501-2447",
     "Users": [
       {
-        "Login": "Sofia",
+        "UserName": "Sofia",
         "FullName": "Sofia Brown",
         "Phone": "(821) 501-2447",
         "Gender": "female",
@@ -106,7 +106,7 @@
     "Phone": "(899) 451-2754",
     "Users": [
       {
-        "Login": "Owens",
+        "UserName": "Owens",
         "FullName": "Owens Pushok",
         "Phone": "(899) 451-2754",
         "Gender": "male",
@@ -127,7 +127,7 @@
         ]
       },
       {
-        "Login": "Bradshaw",
+        "UserName": "Bradshaw",
         "FullName": "Bradshaw Miller",
         "Phone": "(842) 442-2191",
         "Gender": "male",
@@ -154,7 +154,7 @@
     "Phone": "(900) 516-3692",
     "Users": [
       {
-        "Login": "Dean",
+        "UserName": "Dean",
         "FullName": "Dean Winchester",
         "Phone": "(900) 516-3692",
         "Gender": "female",

@@ -6,7 +6,7 @@ namespace CRM.API.DTOs
     public class UserForRegisterDto
     {
         [Required]
-        public string Login { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(8, MinimumLength = 4, ErrorMessage = "You must specify password between 4 and 8 characters")]

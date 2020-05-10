@@ -2,21 +2,22 @@
 
 namespace CRM.API.Migrations
 {
-    public partial class AddedPublicId : Migration
+    public partial class PhotoApprovedColumn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "PublicId",
-                table: "Photo",
-                nullable: true);
+            migrationBuilder.AddColumn<bool>(
+                name: "IsApproved",
+                table: "Photos",
+                nullable: false,
+                defaultValue: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "PublicId",
-                table: "Photo");
+                name: "IsApproved",
+                table: "Photos");
         }
     }
 }

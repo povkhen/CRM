@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 
 namespace CRM.API.Controllers
 {
-    [Authorize]
     [Route("api/users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase
@@ -58,7 +57,7 @@ namespace CRM.API.Controllers
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
              
-            var userFromRepo = await _repo.Get(userId);
+            var userFromRepo = await _repo.Get(userId, true);
 
             var file = photoForCreationDto.File;
 
@@ -103,7 +102,7 @@ namespace CRM.API.Controllers
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
              
-            var user = await _repo.Get(userId);
+            var user = await _repo.Get(userId, true);
 
             if(!user.Photos.Any(p => p.Id == id))
                 return Unauthorized();
@@ -131,7 +130,7 @@ namespace CRM.API.Controllers
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
              
-            var user = await _repo.Get(userId);
+            var user = await _repo.Get(userId, true);
 
             if(!user.Photos.Any(p => p.Id == id))
                 return Unauthorized();

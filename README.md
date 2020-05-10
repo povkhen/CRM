@@ -1,0 +1,1 @@
+Project detailes - docs

@@ -12,7 +12,7 @@ namespace CRM.API.Data.Interfaces
          Task<bool> SaveAll();
          Task<PagedList<User>> GetAll(UserParams userParams);
          Task<IEnumerable<string>> GetAllPositions();
-         Task<User> Get(int id);
+         Task<User> Get(int id, bool isCurrentUser);
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhotoForUser(int userId);
          

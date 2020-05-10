@@ -1,18 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace CRM.API.Models
 {    
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-        public string Login { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
 
         public string FullName { get; set; }
         public string Position { get; set; }
-        public string Email { get; set; }
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -26,6 +22,7 @@ namespace CRM.API.Models
         public virtual ICollection<Message> MessagesSent { get; set; }
         public virtual ICollection<Message> MessagesReceived { get; set; }
         public virtual ICollection<UserService> UserServices { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual int? DepartmentId { get; set; }
         public virtual Department Department { get; set; }
      

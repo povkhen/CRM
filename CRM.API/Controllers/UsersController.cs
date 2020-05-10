@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CRM.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -30,7 +29,7 @@ namespace CRM.API.Controllers
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var userFromRepo = await _repo.Get(currentUserId);
+            var userFromRepo = await _repo.Get(currentUserId, true);
             userParams.UserId = currentUserId;
 
             var users = await _repo.GetAll(userParams);
@@ -42,7 +41,8 @@ namespace CRM.API.Controllers
         [HttpGet("{id}", Name="GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _repo.Get(id);
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
+            var user = await _repo.Get(id, isCurrentUser);
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
             return Ok(userToReturn);
         }
@@ -59,8 +59,8 @@ namespace CRM.API.Controllers
         {
             if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
-            var userFromRepo = await _repo.Get(id);
+      
+            var userFromRepo = await _repo.Get(id, true);
     
             _mapper.Map(userForUpdateDto, userFromRepo);
             

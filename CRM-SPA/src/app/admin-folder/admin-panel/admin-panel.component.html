@@ -1,0 +1,23 @@
+<app-nav></app-nav>
+<div class="container mt-2">
+  <h2>Admin Panel</h2>
+  <div class="tab-panel">
+    <tabset class="member-tabset">
+      <tab *appHasRole="['Admin', 'HR']" heading="User Management">
+        <div>
+          <h4>Role Management</h4>
+          <app-user-management></app-user-management>
+          <h4>Staff Management</h4>
+        </div>
+      </tab>
+
+      <tab *appHasRole="['Admin', 'Moderator']" heading="Photo Management">
+          <app-photo-management></app-photo-management>
+      </tab>
+
+      <tab *appHasRole="['Admin']" heading="Orders Management">
+        
+    </tab>
+    </tabset>
+  </div>
+</div>

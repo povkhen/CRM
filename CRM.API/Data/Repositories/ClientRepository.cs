@@ -18,7 +18,7 @@ namespace CRM.API.Data.Repositories
 
          public async Task<Order> GetOrder(int id)
         {
-            var order = await _context.Order.Include(o => o.Owner)
+            var order = await _context.Orders.Include(o => o.Owner)
                                             .Include(v => v.Vendor)
                                             .Include(p => p.Payment)
                                             .FirstOrDefaultAsync(c => c.Id == id);
@@ -27,7 +27,7 @@ namespace CRM.API.Data.Repositories
 
         public async Task<IEnumerable<Order>> GetAllOrders()
         {
-            var orders = await _context.Order.Include(o => o.Owner)
+            var orders = await _context.Orders.Include(o => o.Owner)
                                                 .Include(v => v.Vendor)
                                                 .Include(p => p.Payment)
                                                 .ToListAsync();
@@ -36,21 +36,21 @@ namespace CRM.API.Data.Repositories
 
         public async Task<bool> NumberExists(string number)
         {
-            if (await _context.Order.AnyAsync(x => x.Number == number))
+            if (await _context.Orders.AnyAsync(x => x.Number == number))
                 return true;
             return false;
         }
 
         public async Task<Customer> Get(int id)
         {
-            var customer = await _context.Customer.Include(o => o.Orders)
+            var customer = await _context.Customers.Include(o => o.Orders)
                                           .FirstOrDefaultAsync(c => c.Id == id);
             return customer;
         }
 
         public async Task<IEnumerable<Customer>> GetAll()
         {
-            var customers = await _context.Customer.Include(o => o.Orders).ToListAsync();
+            var customers = await _context.Customers.Include(o => o.Orders).ToListAsync();
             return customers;
         }
 
@@ -61,13 +61,13 @@ namespace CRM.API.Data.Repositories
 
         public void DeleteOrder(Order order)
         {
-            _context.Order.Remove(order);
+            _context.Orders.Remove(order);
             _context.SaveChanges();
         }
 
         public async Task<Order> AddOrder(Order order)
         {
-            await _context.Order.AddAsync(order);
+            await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
             return order;
         }

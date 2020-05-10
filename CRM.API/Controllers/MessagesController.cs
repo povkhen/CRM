@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CRM.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
     [Route("api/users/{userId}/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
@@ -61,12 +60,12 @@ namespace CRM.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDto messageForCreationDto)
         {
-            var sender = await _repo.Get(userId);
+            var sender = await _repo.Get(userId, false);
             if(sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
             
             messageForCreationDto.SenderId = userId;
-            var recipient = await _repo.Get(messageForCreationDto.RecipientId);
+            var recipient = await _repo.Get(messageForCreationDto.RecipientId, false);
 
             if( recipient == null)
                 return BadRequest("Could not find user");

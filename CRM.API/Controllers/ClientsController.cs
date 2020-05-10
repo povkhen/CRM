@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase

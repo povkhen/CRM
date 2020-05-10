@@ -26,18 +26,23 @@ namespace CRM.API.Data.Repositories
             _context.Remove(entity);
         }
 
-        public async Task<User> Get(int id)
+        public async Task<User> Get(int id, bool isCurrentUser)
+
         {
-            var user = await _context.User.Include(p => p.Photos)
+            var query = _context.Users.Include(p => p.Photos)
                                           .Include(d => d.Department)
                                           .Include(s => s.UserServices)
-                                          .FirstOrDefaultAsync(u => u.Id == id);
+                                          .AsQueryable();
+            if (isCurrentUser)
+                query = query.IgnoreQueryFilters();
+            
+            var user = await query.FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 
         public async Task<PagedList<User>> GetAll(UserParams userParams)
         {
-            var users = _context.User.Include(p => p.Photos)
+            var users = _context.Users.Include(p => p.Photos)
                                      .Include(d => d.Department)
                                      .OrderByDescending(u => u.LastActive)
                                      .AsQueryable();
@@ -71,24 +76,24 @@ namespace CRM.API.Data.Repositories
 
         public async Task<IEnumerable<string>> GetAllPositions()
         {
-            var users = await _context.User.ToListAsync();
+            var users = await _context.Users.ToListAsync();
             return users.Select(p => p.Position).Distinct().Where(x => x != null);
         }
 
         public async Task<Photo> GetMainPhotoForUser(int userId)
         {
-            return await _context.Photo.Where(u => u.UserId == userId)
+            return await _context.Photos.Where(u => u.UserId == userId)
                         .FirstOrDefaultAsync(m => m.IsMain);
         }
 
         public async Task<Message> GetMessage(int id)
         {
-            return await _context.Message.FirstOrDefaultAsync(m => m.Id == id);
+            return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
-            var messages = _context.Message.Include(u => u.Sender)
+            var messages = _context.Messages.Include(u => u.Sender)
                                            .ThenInclude(u => u.Photos)
                                            .Include(r => r.Recipient)
                                            .ThenInclude(r => r.Photos)
@@ -114,7 +119,7 @@ namespace CRM.API.Data.Repositories
 
         public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
         {
-            var messages = await _context.Message.Include(u => u.Sender)
+            var messages = await _context.Messages.Include(u => u.Sender)
                                            .ThenInclude(u => u.Photos)
                                            .Include(r => r.Recipient)
                                            .ThenInclude(r => r.Photos)
@@ -131,7 +136,7 @@ namespace CRM.API.Data.Repositories
 
         public async Task<Photo> GetPhoto(int id)
         {
-            var photo = await _context.Photo.FirstOrDefaultAsync(p => p.Id ==id);
+            var photo = await _context.Photos.IgnoreQueryFilters().FirstOrDefaultAsync(p => p.Id ==id);
             return photo;
         }
 
