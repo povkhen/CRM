@@ -63,6 +63,9 @@ namespace CRM.API.Controllers
         {
             var user = await _userManager.FindByNameAsync(userForLoginDto.UserName);
 
+            if (user is null)
+                return Unauthorized();
+
             user.Photos = await _dataContext.Photos.Where(p => p.UserId == user.Id).ToListAsync();
             user.Department = await _dataContext.Departments.FirstOrDefaultAsync(d => d.Id == user.DepartmentId);
 
